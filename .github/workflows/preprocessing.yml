@@ -11,7 +11,6 @@ on:
 jobs:
   preprocess:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,5 +34,3 @@ jobs:
           name: dataset-preprocessing-terbaru
           path: dataset_preprocessing/
           retention-days: 30
-git add .github/workflows/preprocessing.yml
-git commit --amend --no-edit
