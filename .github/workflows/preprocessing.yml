@@ -1,0 +1,39 @@
+
+name: Preprocessing Dataset
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "automate_Rio-Kurniawan.py"
+      - ".github/workflows/preprocessing.yml"
+
+jobs:
+  preprocess:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas Pillow
+
+      - name: Run preprocessing
+        run: python automate_Rio-Kurniawan.py
+
+      - name: Upload processed dataset
+        uses: actions/upload-artifact@v4
+        with:
+          name: dataset-preprocessing-terbaru
+          path: dataset_preprocessing/
+          retention-days: 30
+git add .github/workflows/preprocessing.yml
+git commit --amend --no-edit
